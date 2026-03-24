@@ -17,6 +17,10 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.preprocessing import LabelEncoder
 
+# Import brain tumor image classification modules
+from models.image_model import get_model as get_brain_tumor_model, BRAIN_TUMOR_CLASSES
+from utils.image_preprocessing import preprocess_image, validate_image
+
 app = Flask(__name__)
 CORS(app, resources={r"/api/*": {"origins": "*"}})
 
@@ -33,12 +37,13 @@ text_encoder = None
 video_model = None
 health_model = None
 health_scaler = None
+brain_tumor_model = None
 
 
 def load_models():
     """Load all ML models on startup"""
     global audio_model, wine_model, wine_scaler, text_model, text_vectorizer, text_encoder
-    global video_model, health_model, health_scaler
+    global video_model, health_model, health_scaler, brain_tumor_model
 
     try:
         # Load audio traffic classification model
@@ -86,6 +91,13 @@ def load_models():
         if os.path.exists(health_scaler_path):
             health_scaler = joblib.load(health_scaler_path)
             print("Health scaler loaded successfully")
+
+        # Load brain tumor MRI classification model
+        brain_tumor_model = get_brain_tumor_model()
+        if brain_tumor_model and brain_tumor_model.model_loaded:
+            print("Brain Tumor MRI model loaded successfully")
+        else:
+            print("Brain Tumor MRI model initialized (using transfer learning)")
 
     except Exception as e:
         print(f"Error loading models: {e}")
@@ -530,6 +542,50 @@ def predict_personality():
         return jsonify({'error': str(e)}), 500
 
 
+# ================== Brain Tumor MRI Classification API ==================
+
+@app.route('/api/image/predict', methods=['POST'])
+def predict_brain_tumor():
+    """Predict brain tumor type from MRI image"""
+    try:
+        if 'image' not in request.files:
+            return jsonify({'error': 'No image file provided'}), 400
+
+        image_file = request.files['image']
+
+        # Validate the image file
+        is_valid, error_message = validate_image(image_file)
+        if not is_valid:
+            return jsonify({'error': error_message}), 400
+
+        # Read image bytes
+        image_bytes = image_file.read()
+
+        # Preprocess image for model
+        preprocessed_image = preprocess_image(image_bytes)
+
+        # Get model and make prediction
+        model = get_brain_tumor_model()
+        result = model.predict(preprocessed_image)
+
+        # Add additional context to the response
+        prediction = result['prediction']
+        response = {
+            'prediction': prediction,
+            'confidence': result['confidence'],
+            'all_probabilities': result['all_probabilities'],
+            'description': model.get_class_description(prediction),
+            'severity': model.get_severity(prediction)
+        }
+
+        return jsonify(response)
+
+    except ValueError as e:
+        return jsonify({'error': str(e)}), 400
+    except Exception as e:
+        return jsonify({'error': f'Prediction failed: {str(e)}'}), 500
+
+
 # ================== Health Check ==================
 
 @app.route('/')
@@ -544,6 +600,7 @@ def home():
             '/api/text/predict',
             '/api/video/predict',
             '/api/health/predict',
+            '/api/image/predict',
             '/api/status'
         ]
     })
@@ -559,7 +616,8 @@ def health_check():
             'wine': wine_model is not None,
             'text': text_model is not None,
             'video': video_model is not None,
-            'health': health_model is not None
+            'health': health_model is not None,
+            'image': brain_tumor_model is not None and brain_tumor_model.model_loaded
         }
     })
 

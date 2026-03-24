@@ -11,7 +11,7 @@ import { Badge } from "@/components/ui/badge";
 import { HistoryCard } from "@/components/cards/HistoryCard";
 import { useStore } from "@/store/useStore";
 
-type FilterType = "all" | "audio" | "numeric" | "text";
+type FilterType = "all" | "audio" | "numeric" | "text" | "video" | "health" | "image";
 
 export default function HistoryPage() {
   const { history, clearHistory } = useStore();
@@ -61,8 +61,8 @@ export default function HistoryPage() {
               </div>
 
               {/* Filter Buttons */}
-              <div className="flex items-center gap-1 p-1 rounded-lg bg-white/5">
-                {(["all", "audio", "numeric", "text"] as FilterType[]).map(
+              <div className="flex items-center gap-1 p-1 rounded-lg bg-white/5 flex-wrap">
+                {(["all", "audio", "numeric", "text", "video", "health", "image"] as FilterType[]).map(
                   (type) => (
                     <Button
                       key={type}

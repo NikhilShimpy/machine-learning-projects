@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Sparkles, ArrowRight, Brain, Zap, Shield } from "lucide-react";
+import { Sparkles, ArrowRight, Brain, Zap, Shield, HeartPulse } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -95,12 +95,13 @@ export default function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="flex flex-wrap justify-center gap-6 mb-12"
+          className="flex flex-wrap justify-center gap-4 mb-12"
         >
           {[
-            { icon: Brain, text: "Audio Traffic Classification", color: "text-neon-purple" },
+            { icon: Brain, text: "Brain Tumor MRI Detection", color: "text-neon-cyan" },
             { icon: Zap, text: "Wine Quality Prediction", color: "text-neon-green" },
-            { icon: Shield, text: "Personality Analysis", color: "text-neon-orange" },
+            { icon: Shield, text: "Violence Detection", color: "text-red-400" },
+            { icon: HeartPulse, text: "Heart Disease Prediction", color: "text-neon-pink" },
           ].map((feature, index) => (
             <motion.div
               key={index}
@@ -138,7 +139,7 @@ export default function Home() {
           className="absolute bottom-8 flex gap-12"
         >
           {[
-            { value: "3", label: "AI Models" },
+            { value: "6", label: "AI Models" },
             { value: "99%", label: "Uptime" },
             { value: "<1s", label: "Response" },
           ].map((stat, index) => (

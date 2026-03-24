@@ -10,6 +10,7 @@ import {
   MessageSquareText,
   Video,
   HeartPulse,
+  Brain,
   History,
   Settings,
   ChevronLeft,
@@ -61,6 +62,12 @@ const navItems = [
     href: "/dashboard/health",
     icon: HeartPulse,
     gradient: "from-neon-pink to-red-500",
+  },
+  {
+    name: "Image AI",
+    href: "/dashboard/image",
+    icon: Brain,
+    gradient: "from-neon-cyan to-neon-blue",
   },
   {
     name: "History",

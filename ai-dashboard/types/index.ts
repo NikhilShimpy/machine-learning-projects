@@ -33,6 +33,19 @@ export interface HealthPredictionResponse {
   confidence: number;
 }
 
+export interface ImagePredictionResponse {
+  prediction: "glioma" | "meningioma" | "no_tumor" | "pituitary";
+  confidence: number;
+  all_probabilities: {
+    glioma: number;
+    meningioma: number;
+    no_tumor: number;
+    pituitary: number;
+  };
+  description: string;
+  severity: "None" | "Medium" | "High";
+}
+
 // Wine Input Features
 export interface WineFeatures {
   fixed_acidity: number;
@@ -68,10 +81,10 @@ export interface HealthFeatures {
 // History Types
 export interface HistoryItem {
   id: string;
-  type: "audio" | "numeric" | "text" | "video" | "health";
+  type: "audio" | "numeric" | "text" | "video" | "health" | "image";
   timestamp: Date;
   input: string;
-  result: AudioPredictionResponse | NumericPredictionResponse | TextPredictionResponse | VideoPredictionResponse | HealthPredictionResponse;
+  result: AudioPredictionResponse | NumericPredictionResponse | TextPredictionResponse | VideoPredictionResponse | HealthPredictionResponse | ImagePredictionResponse;
 }
 
 // API State

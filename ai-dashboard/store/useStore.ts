@@ -6,6 +6,7 @@ import {
   TextPredictionResponse,
   VideoPredictionResponse,
   HealthPredictionResponse,
+  ImagePredictionResponse,
   HistoryItem,
   Toast,
 } from "@/types";
@@ -39,6 +40,10 @@ interface AppState {
   healthResult: HealthPredictionResponse | null;
   healthLoading: boolean;
 
+  // Image State
+  imageResult: ImagePredictionResponse | null;
+  imageLoading: boolean;
+
   // History
   history: HistoryItem[];
 
@@ -71,6 +76,10 @@ interface AppState {
   setHealthResult: (result: HealthPredictionResponse | null) => void;
   setHealthLoading: (loading: boolean) => void;
 
+  // Image Actions
+  setImageResult: (result: ImagePredictionResponse | null) => void;
+  setImageLoading: (loading: boolean) => void;
+
   // History Actions
   addHistoryItem: (item: Omit<HistoryItem, "id" | "timestamp">) => void;
   clearHistory: () => void;
@@ -97,6 +106,8 @@ export const useStore = create<AppState>()(
       videoLoading: false,
       healthResult: null,
       healthLoading: false,
+      imageResult: null,
+      imageLoading: false,
       history: [],
 
       // Global Actions
@@ -138,6 +149,10 @@ export const useStore = create<AppState>()(
       setHealthResult: (result) => set({ healthResult: result }),
       setHealthLoading: (loading) => set({ healthLoading: loading }),
 
+      // Image Actions
+      setImageResult: (result) => set({ imageResult: result }),
+      setImageLoading: (loading) => set({ imageLoading: loading }),
+
       // History Actions
       addHistoryItem: (item) =>
         set((state) => ({
@@ -168,6 +183,8 @@ export const useStore = create<AppState>()(
           videoLoading: false,
           healthResult: null,
           healthLoading: false,
+          imageResult: null,
+          imageLoading: false,
         }),
     }),
     {

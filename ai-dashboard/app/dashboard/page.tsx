@@ -7,6 +7,7 @@ import {
   MessageSquareText,
   Video,
   HeartPulse,
+  Brain,
   Activity,
   Clock,
   Zap,
@@ -85,6 +86,19 @@ const aiModels = [
       { label: "Features", value: "13" },
     ],
   },
+  {
+    title: "Brain Tumor MRI AI",
+    description:
+      "Classify brain MRI scans to detect tumors using MobileNetV2 transfer learning for medical imaging",
+    href: "/dashboard/image",
+    icon: <Brain className="w-7 h-7 text-white" />,
+    gradient: "from-neon-cyan to-neon-blue",
+    status: "active" as const,
+    stats: [
+      { label: "Accuracy", value: "92%" },
+      { label: "Classes", value: "4" },
+    ],
+  },
 ];
 
 const container = {
@@ -129,7 +143,7 @@ export default function DashboardPage() {
           },
           {
             label: "Active Models",
-            value: "5",
+            value: "6",
             icon: Sparkles,
             color: "text-neon-green",
           },
@@ -222,6 +236,12 @@ export default function DashboardPage() {
                 icon={<HeartPulse className="w-5 h-5 text-neon-pink" />}
                 onClick={() => router.push("/dashboard/health")}
               />
+              <QuickActionCard
+                title="Analyze Brain MRI"
+                description="Upload MRI scan for tumor detection"
+                icon={<Brain className="w-5 h-5 text-neon-cyan" />}
+                onClick={() => router.push("/dashboard/image")}
+              />
             </CardContent>
           </Card>
         </motion.div>
@@ -249,6 +269,7 @@ export default function DashboardPage() {
                       text: MessageSquareText,
                       video: Video,
                       health: HeartPulse,
+                      image: Brain,
                     };
                     const Icon = typeIcons[activity.type] || Activity;
 

@@ -5,6 +5,7 @@ import {
   TextPredictionResponse,
   VideoPredictionResponse,
   HealthPredictionResponse,
+  ImagePredictionResponse,
   WineFeatures,
   HealthFeatures,
 } from "@/types";
@@ -111,6 +112,27 @@ export async function predictHealth(
   const response = await api.post<HealthPredictionResponse>(
     "/api/health/predict",
     features
+  );
+
+  return response.data;
+}
+
+// Brain Tumor MRI Classification
+export async function predictBrainTumor(
+  imageFile: File
+): Promise<ImagePredictionResponse> {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  const response = await api.post<ImagePredictionResponse>(
+    "/api/image/predict",
+    formData,
+    {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      timeout: 60000, // 1 minute for image processing
+    }
   );
 
   return response.data;
@@ -296,6 +318,57 @@ export async function mockPredictHealth(
     disease: hasDisease,
     risk,
     confidence: 0.75 + Math.random() * 0.2,
+  };
+}
+
+// Mock Brain Tumor MRI Classification
+export async function mockPredictBrainTumor(
+  imageFile: File
+): Promise<ImagePredictionResponse> {
+  await new Promise((resolve) => setTimeout(resolve, 2500));
+
+  const tumorTypes: Array<"glioma" | "meningioma" | "no_tumor" | "pituitary"> = [
+    "glioma",
+    "meningioma",
+    "no_tumor",
+    "pituitary"
+  ];
+
+  // Generate random probabilities using Dirichlet-like distribution
+  const rawProbs = tumorTypes.map(() => Math.random() + 0.1);
+  const sum = rawProbs.reduce((a, b) => a + b, 0);
+  const normalizedProbs = rawProbs.map(p => p / sum);
+
+  // Find the max probability index
+  const maxIdx = normalizedProbs.indexOf(Math.max(...normalizedProbs));
+  const prediction = tumorTypes[maxIdx];
+  const confidence = normalizedProbs[maxIdx];
+
+  const descriptions: Record<string, string> = {
+    glioma: "Glioma is a type of tumor that occurs in the brain and spinal cord. It begins in the glial cells that surround nerve cells.",
+    meningioma: "Meningioma is a tumor that arises from the meninges, the membranes that surround the brain and spinal cord. Most meningiomas are noncancerous.",
+    pituitary: "Pituitary tumors are abnormal growths that develop in the pituitary gland. Most pituitary tumors are benign.",
+    no_tumor: "No tumor detected. The MRI scan appears normal with no signs of abnormal tissue growth."
+  };
+
+  const severityMap: Record<string, "None" | "Medium" | "High"> = {
+    glioma: "High",
+    meningioma: "Medium",
+    pituitary: "Medium",
+    no_tumor: "None"
+  };
+
+  return {
+    prediction,
+    confidence,
+    all_probabilities: {
+      glioma: normalizedProbs[0],
+      meningioma: normalizedProbs[1],
+      no_tumor: normalizedProbs[2],
+      pituitary: normalizedProbs[3],
+    },
+    description: descriptions[prediction],
+    severity: severityMap[prediction],
   };
 }
 

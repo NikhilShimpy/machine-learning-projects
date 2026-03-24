@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { HistoryItem } from "@/types";
-import { AudioWaveform, Calculator, MessageSquareText, Video, HeartPulse, Trash2 } from "lucide-react";
+import { AudioWaveform, Calculator, MessageSquareText, Video, HeartPulse, Brain, Trash2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 
 const typeIcons = {
@@ -11,6 +11,7 @@ const typeIcons = {
   text: MessageSquareText,
   video: Video,
   health: HeartPulse,
+  image: Brain,
 };
 
 const typeColors = {
@@ -19,6 +20,7 @@ const typeColors = {
   text: "from-neon-orange to-neon-pink",
   video: "from-red-500 to-neon-orange",
   health: "from-neon-pink to-red-500",
+  image: "from-neon-cyan to-neon-blue",
 };
 
 interface HistoryCardProps {
@@ -49,6 +51,11 @@ export function HistoryCard({ item, onDelete }: HistoryCardProps) {
     if (item.type === "health") {
       const result = item.result as { disease: boolean; risk: string };
       return `Disease: ${result.disease ? "Risk" : "No Risk"} (${result.risk})`;
+    }
+    if (item.type === "image") {
+      const result = item.result as { prediction: string; confidence: number };
+      const label = result.prediction === "no_tumor" ? "No Tumor" : result.prediction.charAt(0).toUpperCase() + result.prediction.slice(1);
+      return `Diagnosis: ${label} (${(result.confidence * 100).toFixed(1)}%)`;
     }
     return "";
   };
