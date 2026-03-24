@@ -53,7 +53,7 @@ cd backend
 python -m venv venv
 
 # Activate (Windows)
-venv\Scripts\activate
+venv\Scripts\activate or .\venv\Scripts\Activate.ps1
 
 # Install dependencies
 pip install -r requirements.txt
