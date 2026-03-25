@@ -74,7 +74,7 @@ export function AudioUpload({ onFileSelect, disabled }: AudioUploadProps) {
   return (
     <div className="space-y-4">
       {/* Dropzone */}
-      <motion.div
+      <div
         {...getRootProps()}
         className={cn(
           "relative border-2 border-dashed rounded-2xl p-8 transition-all duration-300 cursor-pointer",
@@ -83,8 +83,6 @@ export function AudioUpload({ onFileSelect, disabled }: AudioUploadProps) {
             : "border-white/20 hover:border-neon-cyan/50 hover:bg-white/5",
           disabled && "opacity-50 cursor-not-allowed"
         )}
-        whileHover={!disabled ? { scale: 1.01 } : undefined}
-        whileTap={!disabled ? { scale: 0.99 } : undefined}
       >
         <input {...getInputProps()} />
 
@@ -129,7 +127,7 @@ export function AudioUpload({ onFileSelect, disabled }: AudioUploadProps) {
             }}
           />
         )}
-      </motion.div>
+      </div>
 
       {/* Selected File Preview */}
       {selectedFile && (

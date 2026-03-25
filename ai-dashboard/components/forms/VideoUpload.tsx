@@ -84,11 +84,8 @@ export function VideoUpload({ onFileSelect, disabled, uploadProgress }: VideoUpl
     <div className="space-y-4">
       <AnimatePresence mode="wait">
         {!file ? (
-          <motion.div
+          <div
             key="dropzone"
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
             {...getRootProps()}
             className={cn(
               "relative border-2 border-dashed rounded-2xl p-8 transition-all duration-300 cursor-pointer",
@@ -148,7 +145,7 @@ export function VideoUpload({ onFileSelect, disabled, uploadProgress }: VideoUpl
                 transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
               />
             )}
-          </motion.div>
+          </div>
         ) : (
           <motion.div
             key="preview"
