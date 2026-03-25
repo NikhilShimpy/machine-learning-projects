@@ -19,6 +19,39 @@ import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
+// TypeScript types for settings
+type ToggleSetting = {
+  name: string;
+  description: string;
+  type: "toggle";
+  enabled: boolean;
+};
+
+type ButtonSetting = {
+  name: string;
+  description: string;
+  type: "buttons";
+  options: Array<{ label: string; icon: any; active: boolean }>;
+};
+
+type InputSetting = {
+  name: string;
+  description: string;
+  type: "input";
+  value: string;
+  placeholder: string;
+};
+
+type SelectSetting = {
+  name: string;
+  description: string;
+  type: "select";
+  value: string;
+  options: string[];
+};
+
+type Setting = ToggleSetting | ButtonSetting | InputSetting | SelectSetting;
+
 const settingsSections = [
   {
     title: "Appearance",
@@ -162,7 +195,7 @@ export default function SettingsPage() {
                         {setting.type === "toggle" && (
                           <motion.button
                             className={`relative w-14 h-7 rounded-full transition-colors duration-200 ${
-                              (setting as any).enabled
+                              (setting as ToggleSetting).enabled
                                 ? "bg-neon-cyan"
                                 : "bg-white/20"
                             }`}
@@ -171,7 +204,7 @@ export default function SettingsPage() {
                             <motion.div
                               className="absolute top-1 w-5 h-5 rounded-full bg-white shadow-lg"
                               animate={{
-                                left: (setting as any).enabled ? "calc(100% - 24px)" : "4px",
+                                left: (setting as ToggleSetting).enabled ? "calc(100% - 24px)" : "4px",
                               }}
                               transition={{
                                 type: "spring",
@@ -184,7 +217,7 @@ export default function SettingsPage() {
 
                         {setting.type === "buttons" && (
                           <div className="flex gap-1 p-1 rounded-lg bg-white/5">
-                            {setting.options?.map((option) => {
+                            {(setting as ButtonSetting).options?.map((option) => {
                               const OptionIcon = option.icon;
                               return (
                                 <Button
@@ -205,19 +238,19 @@ export default function SettingsPage() {
 
                         {setting.type === "input" && (
                           <Input
-                            defaultValue={setting.value}
-                            placeholder={setting.placeholder}
+                            defaultValue={(setting as InputSetting).value}
+                            placeholder={(setting as InputSetting).placeholder}
                             className="w-64"
                           />
                         )}
 
                         {setting.type === "select" && (
                           <div className="flex gap-2">
-                            {setting.options?.map((option) => (
+                            {(setting as SelectSetting).options?.map((option) => (
                               <Badge
                                 key={option}
                                 variant={
-                                  option === setting.value ? "neon" : "default"
+                                  option === (setting as SelectSetting).value ? "neon" : "default"
                                 }
                                 className="cursor-pointer hover:opacity-80"
                               >
