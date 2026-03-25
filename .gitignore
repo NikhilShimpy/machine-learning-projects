@@ -5,6 +5,7 @@ node_modules/
 .next/
 out/
 dist/
+.vercel
 
 # ======================
 # Python
@@ -15,12 +16,16 @@ __pycache__/
 *.pyd
 venv/
 env/
+*.pkl
+*.joblib
 
 # ======================
 # Environment files
 # ======================
 .env
 .env.local
+.env.production.local
+.env.development.local
 
 # ======================
 # ML Models & Data
@@ -31,6 +36,8 @@ env/
 *.ckpt
 data/
 datasets/
+models/*.pkl
+models/*.joblib
 
 # ======================
 # Jupyter
@@ -47,3 +54,9 @@ datasets/
 # ======================
 .DS_Store
 Thumbs.db
+
+# ======================
+# Build artifacts
+# ======================
+tsconfig.tsbuildinfo
+*.tsbuildinfo

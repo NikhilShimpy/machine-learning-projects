@@ -8,7 +8,8 @@ soundfile>=0.12.0
 xgboost>=2.0.0
 joblib>=1.3.0
 python-dotenv>=1.0.0
-opencv-python>=4.8.0
+opencv-python-headless>=4.8.0
 Pillow>=10.0.0
+gunicorn>=21.2.0
 # TensorFlow removed - incompatible with Python 3.14
 # The backend will work in fallback/demo mode for deep learning models
