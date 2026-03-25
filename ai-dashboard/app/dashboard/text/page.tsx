@@ -8,7 +8,7 @@ import {
   Users,
   BookOpen,
   Film,
-  Sparkles,
+  Lightbulb,
   Brain,
 } from "lucide-react";
 import { PageWrapper } from "@/components/layout/PageWrapper";
@@ -243,7 +243,7 @@ export default function TextPage() {
                     {/* Recommendations */}
                     <div className="space-y-4">
                       <h4 className="text-sm font-medium text-white/60 flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-neon-cyan" />
+                        <Lightbulb className="w-4 h-4 text-neon-cyan" />
                         Personalized Recommendations
                       </h4>
 

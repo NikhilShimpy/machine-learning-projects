@@ -15,7 +15,6 @@ import {
   Settings,
   ChevronLeft,
   ChevronRight,
-  Sparkles,
 } from "lucide-react";
 import { useStore } from "@/store/useStore";
 import { cn } from "@/lib/utils";
@@ -104,7 +103,7 @@ export function Sidebar() {
               whileTap={{ scale: 0.95 }}
             >
               <div className="w-full h-full rounded-xl bg-background flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-neon-cyan" />
+                <span className="text-sm font-bold gradient-text">NN</span>
               </div>
             </motion.div>
             <AnimatePresence mode="wait">

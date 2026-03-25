@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Calculator, Wine, BarChart3, Sparkles, TrendingUp } from "lucide-react";
+import { Calculator, Wine, BarChart3, Award, TrendingUp } from "lucide-react";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -194,7 +194,7 @@ export default function NumericPage() {
                         variant={getQualityConfig(result.quality).badge}
                         className="px-4 py-2 text-base"
                       >
-                        <Sparkles className="w-4 h-4 mr-2" />
+                        <Award className="w-4 h-4 mr-2" />
                         {result.category} Quality
                       </Badge>
                     </motion.div>

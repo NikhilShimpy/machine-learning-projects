@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import {
   AudioWaveform,
-  Calculator,
   MessageSquareText,
   Video,
   HeartPulse,
@@ -12,7 +11,7 @@ import {
   Clock,
   Zap,
   TrendingUp,
-  Sparkles,
+  Layers,
 } from "lucide-react";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { AICard, QuickActionCard } from "@/components/cards/AICard";
@@ -30,21 +29,8 @@ const aiModels = [
     gradient: "from-neon-purple to-neon-pink",
     status: "active" as const,
     stats: [
-      { label: "Accuracy", value: "74%" },
+      { label: "Accuracy", value: "67%" },
       { label: "Classes", value: "3" },
-    ],
-  },
-  {
-    title: "Wine Quality AI",
-    description:
-      "Predict wine quality scores based on chemical properties using Random Forest regression models",
-    href: "/dashboard/numeric",
-    icon: <Calculator className="w-7 h-7 text-white" />,
-    gradient: "from-neon-green to-neon-cyan",
-    status: "active" as const,
-    stats: [
-      { label: "R² Score", value: "0.46" },
-      { label: "Features", value: "11" },
     ],
   },
   {
@@ -56,7 +42,7 @@ const aiModels = [
     gradient: "from-neon-orange to-neon-pink",
     status: "active" as const,
     stats: [
-      { label: "Accuracy", value: "63%" },
+      { label: "Accuracy", value: "67.28%" },
       { label: "Types", value: "16" },
     ],
   },
@@ -69,7 +55,7 @@ const aiModels = [
     gradient: "from-red-500 to-neon-orange",
     status: "active" as const,
     stats: [
-      { label: "Accuracy", value: "67%" },
+      { label: "Accuracy", value: "77%" },
       { label: "Classes", value: "2" },
     ],
   },
@@ -95,7 +81,7 @@ const aiModels = [
     gradient: "from-neon-cyan to-neon-blue",
     status: "active" as const,
     stats: [
-      { label: "Accuracy", value: "92%" },
+      { label: "Accuracy", value: "77%" },
       { label: "Classes", value: "4" },
     ],
   },
@@ -143,8 +129,8 @@ export default function DashboardPage() {
           },
           {
             label: "Active Models",
-            value: "6",
-            icon: Sparkles,
+            value: "5",
+            icon: Layers,
             color: "text-neon-green",
           },
           {
@@ -213,12 +199,6 @@ export default function DashboardPage() {
                 onClick={() => router.push("/dashboard/audio")}
               />
               <QuickActionCard
-                title="Predict Wine Quality"
-                description="Enter chemical properties"
-                icon={<Calculator className="w-5 h-5 text-neon-green" />}
-                onClick={() => router.push("/dashboard/numeric")}
-              />
-              <QuickActionCard
                 title="Analyze Personality"
                 description="Input text for MBTI prediction"
                 icon={<MessageSquareText className="w-5 h-5 text-neon-orange" />}
@@ -265,7 +245,6 @@ export default function DashboardPage() {
                   {recentActivity.map((activity, index) => {
                     const typeIcons: Record<string, typeof AudioWaveform> = {
                       audio: AudioWaveform,
-                      numeric: Calculator,
                       text: MessageSquareText,
                       video: Video,
                       health: HeartPulse,

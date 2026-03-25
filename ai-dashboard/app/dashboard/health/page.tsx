@@ -9,7 +9,7 @@ import {
   AlertTriangle,
   CheckCircle2,
   Activity,
-  Sparkles,
+  ListChecks,
 } from "lucide-react";
 import { PageWrapper } from "@/components/layout/PageWrapper";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -250,7 +250,7 @@ export default function HealthPage() {
                       className="space-y-3"
                     >
                       <p className="text-xs text-white/40 flex items-center gap-2">
-                        <Sparkles className="w-3 h-3" />
+                        <ListChecks className="w-3 h-3" />
                         Key factors analyzed:
                       </p>
                       <div className="flex flex-wrap gap-2">

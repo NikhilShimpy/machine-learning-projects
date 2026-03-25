@@ -2,8 +2,7 @@
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { Sparkles, ArrowRight, Brain, Zap, Shield, HeartPulse } from "lucide-react";
+import { ArrowRight, Brain, AudioWaveform, Shield, HeartPulse } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -56,15 +55,15 @@ export default function Home() {
             <div className="w-full h-full rounded-3xl bg-background flex items-center justify-center">
               <motion.div
                 animate={{
-                  rotate: [0, 360],
+                  scale: [1, 1.05, 1],
                 }}
                 transition={{
-                  duration: 20,
+                  duration: 3,
                   repeat: Infinity,
-                  ease: "linear",
+                  ease: "easeInOut",
                 }}
               >
-                <Sparkles className="w-12 h-12 text-neon-cyan" />
+                <span className="text-3xl font-bold gradient-text">NN</span>
               </motion.div>
             </div>
           </div>
@@ -99,7 +98,7 @@ export default function Home() {
         >
           {[
             { icon: Brain, text: "Brain Tumor MRI Detection", color: "text-neon-cyan" },
-            { icon: Zap, text: "Wine Quality Prediction", color: "text-neon-green" },
+            { icon: AudioWaveform, text: "Audio Traffic Analysis", color: "text-neon-purple" },
             { icon: Shield, text: "Violence Detection", color: "text-red-400" },
             { icon: HeartPulse, text: "Heart Disease Prediction", color: "text-neon-pink" },
           ].map((feature, index) => (
@@ -139,7 +138,7 @@ export default function Home() {
           className="absolute bottom-8 flex gap-12"
         >
           {[
-            { value: "6", label: "AI Models" },
+            { value: "5", label: "AI Models" },
             { value: "99%", label: "Uptime" },
             { value: "<1s", label: "Response" },
           ].map((stat, index) => (

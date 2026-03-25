@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowRight, Sparkles, Zap } from "lucide-react";
+import { ArrowRight, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 interface AICardProps {
@@ -104,11 +104,6 @@ export function AICard({
             <span className="text-sm font-medium">Launch Module</span>
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </div>
-        </div>
-
-        {/* Corner decoration */}
-        <div className="absolute bottom-0 right-0 w-24 h-24 opacity-5 group-hover:opacity-10 transition-opacity">
-          <Sparkles className="w-full h-full" />
         </div>
       </motion.div>
     </Link>
