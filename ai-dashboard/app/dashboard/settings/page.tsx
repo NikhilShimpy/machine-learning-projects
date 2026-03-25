@@ -162,7 +162,7 @@ export default function SettingsPage() {
                         {setting.type === "toggle" && (
                           <motion.button
                             className={`relative w-14 h-7 rounded-full transition-colors duration-200 ${
-                              setting.enabled
+                              (setting as any).enabled
                                 ? "bg-neon-cyan"
                                 : "bg-white/20"
                             }`}
@@ -171,7 +171,7 @@ export default function SettingsPage() {
                             <motion.div
                               className="absolute top-1 w-5 h-5 rounded-full bg-white shadow-lg"
                               animate={{
-                                left: setting.enabled ? "calc(100% - 24px)" : "4px",
+                                left: (setting as any).enabled ? "calc(100% - 24px)" : "4px",
                               }}
                               transition={{
                                 type: "spring",
