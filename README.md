@@ -522,6 +522,8 @@ pip install -r requirements.txt
 ```bash
 # Terminal 1: Backend
 cd ai-dashboard/backend
+ven\Script\activate or .\venv\Scripts\Activate.ps1
+python export_moedel.py
 python app.py
 
 # Terminal 2: Frontend
