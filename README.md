@@ -6,6 +6,12 @@ A comprehensive AI platform featuring five machine learning models for audio cla
 
 ---
 
+## Contributors
+
+- Chetna Sikarwar (@chetnasingh31)
+
+---
+
 ## Table of Contents
 
 1. [Project Overview](#project-overview)
