@@ -9,6 +9,7 @@ A comprehensive AI platform featuring five machine learning models for audio cla
 ## Contributors
 
 - **Chetna Sikarwar** – [@chetnasingh31](https://github.com/chetnasingh31)
+- **Ayush Sharma** – [@chetnasingh31](https://github.com/ayushsharma012)
 
 ---
 
